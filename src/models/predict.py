@@ -24,11 +24,11 @@ class FakeNewsDetector:
         prediction = self.pipeline.predict([cleaned_text])[0]
         
         return {
-            'prediction': 'Fake' if prediction == 1 else 'Real',
+            'prediction': 'FAKE' if prediction == 1 else 'REAL',
             'confidence': prob[prediction],
             'probabilities': {
-                'Real': prob[0],
-                'Fake': prob[1]
+                'REAL': prob[0],
+                'FAKE': prob[1]
             }
         }
 

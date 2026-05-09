@@ -85,7 +85,7 @@ def main():
             st.markdown("### Results")
             
             # Prediction Box
-            if result['prediction'] == "FAKE":
+            if result['prediction'].upper() == "FAKE":
                 st.markdown(
                     f'<div class="prediction-box-fake">'
                     f'<h2>🚨 Predicted: FAKE NEWS</h2>'

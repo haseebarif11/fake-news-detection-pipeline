@@ -80,6 +80,15 @@ def normalize_hashtags(text: str) -> str:
     return re.sub(r"#(\w+)", r"\1", text)
 
 
+def remove_source_tags(text: str) -> str:
+    """Remove common news agency source tags like 'WASHINGTON (Reuters) - '."""
+    # Pattern for "LOCATION (Agency) - " or "AGENCY - "
+    text = re.sub(r'^[A-Z, ]+\s+\([A-Z, ]+\)\s+-\s+', '', text)
+    text = re.sub(r'^[A-Z, ]+-[A-Z, ]+\s+-\s+', '', text)
+    text = re.sub(r'\(Reuters\)', '', text, flags=re.IGNORECASE)
+    return text
+
+
 def remove_special_chars(text: str) -> str:
     """Remove non-alphanumeric characters (except spaces)."""
     return re.sub(r"[^a-zA-Z0-9\s]", " ", text)
@@ -130,6 +139,7 @@ def clean_text(
 
     if do_html:
         text = strip_html(text)
+        text = remove_source_tags(text)
     if do_urls:
         text = normalize_urls(text)
     if do_mentions:
