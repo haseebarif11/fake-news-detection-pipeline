@@ -104,18 +104,47 @@ Open notebooks in order: `01_eda_news.ipynb` → `02_eda_tweets.ipynb` → `03_p
 
 ---
 
-## 🛠️ Tech Stack
+## 📊 Final Model Comparison
 
-- **Python 3.10+**
-- **pandas / numpy** — Data manipulation
-- **matplotlib / seaborn / wordcloud** — Visualization
-- **NLTK** — Text processing
-- **scikit-learn** — ML models
-- **HuggingFace datasets** — Dataset loading
-- **BeautifulSoup4** — HTML parsing
+Our pipeline was benchmarked across traditional Machine Learning baselines and state-of-the-art Deep Learning models.
+
+| Model | Dataset | Accuracy | F1-Score | Note |
+| :--- | :--- | :--- | :--- | :--- |
+| **BERT** | News (ISOT) | **100%** | **1.00** | Exceptional on long-form text |
+| **RoBERTa** | Tweets (COVID) | **85.5%** | **0.82** | Native Slang/Emoji support |
+| **Random Forest** | News (ISOT) | 99.4% | 0.99 | Best balance for production |
+| **Random Forest** | Tweets (COVID) | 91.4% | 0.91 | TF-IDF + Stylometrics |
+| **Logistic Regression**| News (ISOT) | 98.1% | 0.98 | Reliable baseline |
+
+### 🔍 Interpretability with LIME
+We don't just predict; we explain. Using **LIME (Local Interpretable Model-agnostic Explanations)**, we can see exactly which words trigger a "Fake" classification. Sensationalist words like "BREAKING" or "SECRET" often carry the most weight in misinformation.
 
 ---
 
-## 📝 License
+## 🚀 How to Run
 
-This project is for educational purposes.
+### 1. Web Application (Streamlit)
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+### 2. Training Pipelines
+All phases are documented in Jupyter Notebooks:
+- `01_eda_news.ipynb`: Exploratory Data Analysis for News.
+- `04_feature_engineering_and_modeling.ipynb`: Classical ML Baselines.
+- `05_deep_learning_models.ipynb`: BERT & RoBERTa Fine-tuning.
+- `06_interpretability_and_comparison.ipynb`: LIME Explanations.
+
+---
+
+## 🛠️ Tech Stack
+- **Core:** Python, Pandas, Scikit-Learn
+- **NLP:** Transformers (HuggingFace), NLTK, TextBlob, TextStat
+- **Deep Learning:** PyTorch, BERT, RoBERTa
+- **Explainability:** LIME
+- **Deployment:** Streamlit
+
+---
+**Author:** Haseeb Arif
+**Project:** Fake News & Misinformation Detection Pipeline
